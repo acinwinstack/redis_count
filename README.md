@@ -1,4 +1,4 @@
-docker get_started deployed in k8s
+Docker get_started deployed in k8s
 https://docs.docker.com/get-started/
 
 1. no visualizer
