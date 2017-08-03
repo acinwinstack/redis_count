@@ -1,0 +1,45 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+
+metadata:
+  name: web
+
+spec:
+
+  minReadySeconds: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 3
+      maxUnavailable: 3
+
+  replicas: 5
+  template:
+
+    metadata:
+      name: web
+      labels:
+        name: web
+        app: demo
+
+    spec:
+
+      containers:
+
+      - name: web
+        image: "acinwinstack/redis_count"
+        env:
+          - name: "REDIS_HOST"
+            value: "172.17.0.5"
+          - name: "NAME"
+            value: "Alfie Chen"
+        ports:
+        - containerPort: 80
+        volumeMounts:
+          - name: vol
+            mountPath: /scrub
+
+      volumes:
+        - name: vol
+          hostPath:
+            path: /webvol
