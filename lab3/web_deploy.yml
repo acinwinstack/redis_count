@@ -6,7 +6,6 @@ metadata:
 
 spec:
 
-  minReadySeconds: 5
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -14,6 +13,7 @@ spec:
       maxUnavailable: 3
 
   replicas: 5
+
   template:
 
     metadata:
@@ -25,21 +25,19 @@ spec:
     spec:
 
       containers:
-
       - name: web
-        image: "acinwinstack/redis_count"
+        image: "acinwinstack/redis_count:deploy"
         env:
           - name: "REDIS_HOST"
-            value: "172.17.0.5"
-          - name: "NAME"
-            value: "Alfie Chen"
+            value: "redis_pod_ip"
         ports:
         - containerPort: 80
         volumeMounts:
-          - name: vol
-            mountPath: /scrub
+        - name: vol
+          mountPath: /scrub
 
       volumes:
-        - name: vol
-          hostPath:
-            path: /webvol
+      - name: vol
+        hostPath:
+          path: /webvol
+
