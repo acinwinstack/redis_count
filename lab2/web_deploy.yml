@@ -26,7 +26,7 @@ spec:
 
       containers:
       - name: web
-        image: "acinwinstack/redis_count:pod"
+        image: "acinwinstack/redis_count:deploy_v2"
         env:
           - name: "REDIS_HOST"
             value: "redis_pod_ip"
